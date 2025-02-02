@@ -22,5 +22,5 @@ jobs:
     with:
       dockerAccount: brunobrasolin
       applicationName: identity-hub
-      port: 81
+      port: 88
     secrets: inherit
