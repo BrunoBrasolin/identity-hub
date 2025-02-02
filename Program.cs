@@ -12,6 +12,8 @@ try
 {
 	var builder = WebApplication.CreateBuilder(args);
 	ConfigurationHelper.Initialize(builder.Configuration);
+	if (builder.Environment.EnvironmentName == "Production")
+		builder.Configuration.SetBasePath("/app/config");
 
 	builder.Host.UseSerilog((ctx, lc) => lc
 		.WriteTo.Console(outputTemplate: "[{Timestamp:HH:mm:ss} {Level}] {SourceContext}{NewLine}{Message:lj}{NewLine}{Exception}{NewLine}")
