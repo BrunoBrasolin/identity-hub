@@ -11,7 +11,6 @@ namespace identity_hub
 			builder.Services.AddIdentityServer(options =>
 				{
 					options.EmitStaticAudienceClaim = true;
-					options.IssuerUri = "https://api.gamidas.dev.br/identity-hub";
 				})
 				.AddInMemoryIdentityResources(Config.IdentityResources)
 				.AddInMemoryApiScopes(Config.ApiScopes)
@@ -33,6 +32,13 @@ namespace identity_hub
 			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseAuthentication();
+
+			app.Use((context, next) =>
+			{
+				context.Request.IsHttps = true;
+				context.Request.Host = new HostString("gamidas.dev.br");
+				return next();
+			});
 
 			app.UseIdentityServer();
 

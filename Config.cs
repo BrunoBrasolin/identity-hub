@@ -17,7 +17,7 @@ public static class Config
 				ClientSecrets = { new Secret("secret".Sha256()) },
 				AllowedScopes = { "openid", "profile" },
 				AllowedGrantTypes = GrantTypes.Code,
-				RedirectUris = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value }
+				RedirectUris = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value + "/login" }
 			}
 		};
 }
