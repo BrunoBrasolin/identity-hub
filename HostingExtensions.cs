@@ -36,7 +36,7 @@ namespace identity_hub
 			app.Use((context, next) =>
 			{
 				context.Request.IsHttps = true;
-				context.Request.Host = new HostString("api.gamidas.dev.br");
+				context.Request.Host = new HostString("api.gamidas.dev.br/identity-hub");
 				return next();
 			});
 
