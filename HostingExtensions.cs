@@ -32,6 +32,7 @@ namespace identity_hub
 			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseAuthentication();
+			app.UsePathBase("/identity-hub");
 
 			app.Use((context, next) =>
 			{
