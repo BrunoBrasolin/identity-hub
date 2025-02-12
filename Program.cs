@@ -26,9 +26,21 @@ try
 		return new DefaultCorsPolicyService(logger) { AllowedOrigins = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value } };
 	});
 
+	builder.Services.AddCors(options =>
+	{
+		options.AddPolicy("CorsPolicy", policy =>
+		{
+			policy.WithOrigins(ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value)
+				  .AllowAnyHeader()
+				  .AllowAnyMethod();
+		});
+	});
+
 	var app = builder
 		.ConfigureServices()
 		.ConfigurePipeline();
+
+	app.UseCors("CorsPolicy");
 
 	app.Run();
 }
