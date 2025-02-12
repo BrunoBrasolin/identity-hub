@@ -33,7 +33,8 @@ try
 	{
 		options.AddPolicy("CorsPolicy", policy =>
 		{
-			policy.WithOrigins(["gamidas.dev.br", "api.gamidas.dev.br"])
+			policy.AllowAnyOrigin()
+				  .SetIsOriginAllowedToAllowWildcardSubdomains()
 				  .AllowAnyHeader()
 				  .AllowAnyMethod();
 		});
