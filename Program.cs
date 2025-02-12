@@ -30,7 +30,7 @@ try
 	{
 		options.AddPolicy("CorsPolicy", policy =>
 		{
-			policy.WithOrigins(ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value)
+			policy.WithOrigins(["gamidas.dev.br", "api.gamidas.dev.br"])
 				  .AllowAnyHeader()
 				  .AllowAnyMethod();
 		});
