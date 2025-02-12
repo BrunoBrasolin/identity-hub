@@ -18,7 +18,7 @@ public static class Config
 				AllowedScopes = { "openid", "profile" },
 				AllowedGrantTypes = GrantTypes.Code,
 				RedirectUris = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value + "/login" },
-				AllowedCorsOrigins = { "gamidas.dev.br", "api.gamidas.dev.br" },
+				AllowedCorsOrigins = { "https://gamidas.dev.br" }
 			}
 		};
 }
