@@ -32,12 +32,12 @@ namespace identity_hub
 			app.UseStaticFiles();
 			app.UseRouting();
 			app.UseAuthentication();
-			app.UsePathBase("/identity-hub");
 
 			app.Use((context, next) =>
 			{
 				context.Request.IsHttps = true;
-				context.Request.Host = new HostString("api.gamidas.dev.br/identity-hub");
+				context.Request.Host = new HostString("api.gamidas.dev.br");
+				context.Request.PathBase = new PathString("/identity-hub");
 				return next();
 			});
 
