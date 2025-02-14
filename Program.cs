@@ -25,7 +25,7 @@ try
 		var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
 		return new DefaultCorsPolicyService(logger)
 		{
-			AllowedOrigins = { "gamidas.dev.br", "api.gamidas.dev.br" }
+			AllowedOrigins = { "https://gamidas.dev.br", "https://api.gamidas.dev.br" }
 		};
 	});
 
