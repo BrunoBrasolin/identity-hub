@@ -23,9 +23,10 @@ try
 	builder.Services.AddSingleton<ICorsPolicyService>(container =>
 	{
 		var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
+
 		return new DefaultCorsPolicyService(logger)
 		{
-			AllowedOrigins = { "https://gamidas.dev.br", "https://api.gamidas.dev.br" }
+			AllowAll = true
 		};
 	});
 
