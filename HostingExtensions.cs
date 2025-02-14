@@ -11,6 +11,7 @@ namespace identity_hub
 			builder.Services.AddIdentityServer(options =>
 				{
 					options.EmitStaticAudienceClaim = true;
+					options.Cors.CorsPolicyName = "CorsPolicy";
 				})
 				.AddInMemoryIdentityResources(Config.IdentityResources)
 				.AddInMemoryApiScopes(Config.ApiScopes)
@@ -23,11 +24,7 @@ namespace identity_hub
 		public static WebApplication ConfigurePipeline(this WebApplication app)
 		{
 			app.UseSerilogRequestLogging();
-
-			if (app.Environment.IsDevelopment())
-			{
-				app.UseDeveloperExceptionPage();
-			}
+			app.UseDeveloperExceptionPage();
 
 			app.UseStaticFiles();
 			app.UseRouting();
@@ -45,6 +42,8 @@ namespace identity_hub
 
 			app.UseAuthorization();
 			app.MapRazorPages().RequireAuthorization();
+
+			app.UseCors("CorsPolicy");
 
 			return app;
 		}

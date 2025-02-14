@@ -1,4 +1,5 @@
 ﻿
+using Duende.IdentityServer;
 using Duende.IdentityServer.Models;
 
 namespace identity_hub;
@@ -14,11 +15,15 @@ public static class Config
 			new Client()
 			{
 				ClientId = "gamidas-portal",
+				ClientName = "Gamidas Portal",
 				ClientSecrets = { new Secret("secret".Sha256()) },
-				AllowedScopes = { "openid", "profile" },
+				AllowedScopes = {
+					IdentityServerConstants.StandardScopes.OpenId,
+					IdentityServerConstants.StandardScopes.Profile
+				},
 				AllowedGrantTypes = GrantTypes.Code,
 				RedirectUris = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value + "/login" },
-				AllowedCorsOrigins = { "https://gamidas.dev.br" }
+				AllowedCorsOrigins = { ConfigurationHelper.config.GetSection("GamidasPortalUrl").Value }
 			}
 		};
 }

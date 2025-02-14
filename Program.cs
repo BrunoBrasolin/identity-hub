@@ -44,8 +44,6 @@ try
 		.ConfigureServices()
 		.ConfigurePipeline();
 
-	app.UseCors("CorsPolicy");
-
 	app.Run();
 }
 catch (Exception ex)
