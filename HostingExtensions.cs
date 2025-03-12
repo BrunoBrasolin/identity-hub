@@ -8,11 +8,7 @@ namespace identity_hub
 		{
 			builder.Services.AddRazorPages();
 
-			builder.Services.AddIdentityServer(options =>
-				{
-					options.EmitStaticAudienceClaim = true;
-					options.Cors.CorsPolicyName = "CorsPolicy";
-				})
+			builder.Services.AddIdentityServer()
 				.AddInMemoryIdentityResources(Config.IdentityResources)
 				.AddInMemoryApiScopes(Config.ApiScopes)
 				.AddInMemoryClients(Config.Clients)
@@ -33,8 +29,11 @@ namespace identity_hub
 			app.Use((context, next) =>
 			{
 				context.Request.IsHttps = true;
-				context.Request.Host = new HostString("api.gamidas.dev.br");
-				context.Request.PathBase = new PathString("/identity-hub");
+				if (app.Environment.IsProduction())
+				{
+					context.Request.Host = new HostString("api.gamidas.dev.br");
+					context.Request.PathBase = new PathString("/identity-hub");
+				}
 				return next();
 			});
 
@@ -43,7 +42,8 @@ namespace identity_hub
 			app.UseAuthorization();
 			app.MapRazorPages().RequireAuthorization();
 
-			app.UseCors("CorsPolicy");
+			if (app.Environment.IsProduction())
+				app.UseCors("CorsPolicy");
 
 			return app;
 		}

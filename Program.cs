@@ -20,16 +20,6 @@ try
 		.Enrich.FromLogContext()
 		.ReadFrom.Configuration(ctx.Configuration));
 
-	builder.Services.AddSingleton<ICorsPolicyService>(container =>
-	{
-		var logger = container.GetRequiredService<ILogger<DefaultCorsPolicyService>>();
-
-		return new DefaultCorsPolicyService(logger)
-		{
-			AllowAll = true
-		};
-	});
-
 	builder.Services.AddCors(options =>
 	{
 		options.AddPolicy("CorsPolicy", policy =>
